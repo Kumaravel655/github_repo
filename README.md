@@ -1,7 +1,7 @@
 # github_repo
 # Aim:
 to develop the github repository pageclone using front end 
-## technology used: html,css,js,flask(forhostinng,login
+## technology used: html,css,js,flask
 ## hosted website :
 https://kumaravelv2122.pythonanywhere.com/
 ## our outputs
