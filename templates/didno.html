@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Github clone website</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            /* Apply the fade-in animation to the header */
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Navigation styles */
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #887f7f;
+            color: #fff;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .menu {
+            display: flex;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 15px;
+        }
+
+        .search-bar {
+            margin-left: auto;
+        }
+
+        .search-bar input {
+            padding: 8px;
+        }
+
+        .sign-in,
+        .sign-up {
+            margin-left: 15px;
+            cursor: pointer;
+        }
+
+        /* Hero container styles */
+        .hero-container {
+            text-align: center;
+            padding: 50px;
+            background: linear-gradient(-45deg, #3498db, #e74c3c);
+        }
+
+        .hero-container h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .hero-container p {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            padding: 15px 30px;
+            font-size: 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Combined section styles */
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+        }
+
+        .cta-container {
+            text-align: center;
+        }
+
+        .cta-text {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Footer styles */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Github clone website</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="logo">GitHub</div>
+        <div class="menu">
+            <a href="#">Features</a>
+            <a href="#">Business</a>
+            <a href="#">Explore</a>
+            <a href="#">Marketplace</a>
+            <a href="#">Pricing</a>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search GitHub">
+        </div>
+        <a href="{{ url_for('signup') }}"><button class="sign-in">Sign In</button></a>
+        <a href="{{ url_for('signup') }}"><button class="sign-up">Sign Up</button></a>
+    </nav>
+
+    <!-- Hero container -->
+    <div class="hero-container">
+        <h1>Build better together</h1>
+        <p>GitHub is where over 73 million developers shape the future of software, together. Contribute to the open source community, manage your Git repositories, review code like a pro, track bugs and features, power your CI/CD, and much more.</p>
+        <p></p>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+        <a href="{{ url_for('signup') }}"><button class="cta-button">Sign up for free</button></a>
+    </div>
+
+   
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2023 Your Website. All rights reserved.
+    </footer>
+</body>
+
+</html>

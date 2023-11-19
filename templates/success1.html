@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repository Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(-45deg, #8691b3, #edeef3);
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-input {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .language-filter {
+            margin-left: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .repo-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .repo-card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .repo-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .repo-card .repo-details {
+            padding: 10px;
+        }
+
+        .repo-card h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .repo-card p {
+            font-size: 14px;
+            color: #555;
+        }
+        .repo-card .star-icon {
+        font-size: 24px;
+        margin-right: 5px;
+        cursor: pointer; /* Add cursor style to indicate it's clickable */
+    }
+
+    /* Add this style for the blinking effect and color change */
+    .repo-card .starred {
+        animation: blink 1s infinite, colorChange 2s infinite;
+        color: yellow;
+    }
+
+    /* Define the blinking animation */
+    @keyframes blink {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    /* Define the color change animation */
+    @keyframes colorChange {
+        0%, 50% {
+            color: yellow;
+        }
+        100% {
+            color: inherit;
+        }
+    }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>GitHub Repository Page</h1>
+    </header>
+
+    <main>
+        <div class="search-bar">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search repositories...">
+            <select id="languageFilter" class="language-filter">
+                <option value="">Filter by Language</option>
+                <option value="JavaScript">JavaScript</option>
+                <option value="Python">Python</option>
+                <option value="Java">Java</option>
+                <option value="Golang">Golang</option>
+                <!-- Add more programming languages as needed -->
+            </select>
+            <label for="starredFilter">
+                <input type="checkbox" id="starredFilter" onclick="filterRepositories()"> Starred Repos
+            </label>
+        </div>
+
+        <div class="repo-container" id="repoContainer">
+            <!-- Repository cards will be dynamically added here -->
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2023 GitHub Repository Page. All rights reserved.
+    </footer>
+
+    <script>
+        // Define sample repositories (replace with your own data)
+        const repositories = [
+            {
+                name: 'python Repo 1',
+                description: 'This is a sample repository for the python.',
+                language: 'Python',
+                stars: 0,
+                imageUrl: 'https://www.python.org/static/opengraph-icon-200x200.png'
+              
+
+            },
+            {
+                name: 'java Repo 2',
+                description: 'Another sample repository with a Java',
+                language: 'java',
+                stars:0,
+                imageUrl: 'https://via.placeholder.com/300/007396/FFFFFF/?text=Java'
+            },
+            {
+                name: 'Php Repo 3',
+                description: 'This is a sample repository.',
+                language: 'JavaScript',
+                stars: 0,
+                imageUrl: 'https://via.placeholder.com/300/777BB4/FFFFFF/?text=PHP'
+            },
+            {
+                name: 'c++ Repo 4',
+                description: 'Another sample repository with a longer description.',
+                language: 'Python',
+                stars: 0,
+                imageUrl: 'https://via.placeholder.com/300/5C5C5C/FFFFFF/?text=C%2B%2B'
+            },{
+                name: 'C Repo 5',
+                description: 'This is a sample repository.',
+                language: 'JavaScript',
+                stars: 0,
+                imageUrl: 'https://via.placeholder.com/300/68217A/FFFFFF/?text=C%23'
+            },
+            {
+                name: 'Golang Repo 6',
+                description: 'Another sample repository with a longer description.',
+                language: 'Golang',
+                stars: 0,
+                imageUrl: 'https://via.placeholder.com/300/00ACD7/FFFFFF/?text=Golang'
+            },{
+                name: 'Javascript Repo 7',
+                description: 'This is a sample repository.',
+                language: 'JavaScript',
+                stars: 0,
+                imageUrl: 'https://via.placeholder.com/300/F7DF1E/000000/?text=JavaScript'
+            },
+            {
+                name: 'kotlin Repo 8',
+                description: 'Another sample repository with a longer description.',
+                language: 'Python',
+                stars: 0,
+                imageUrl: 'https://via.placeholder.com/300/FFD700/FFFFFF/?text=Kotlin'
+            },
+            // Add more repositories as needed
+        ];
+ 
+    // Function to render repositories
+     // Function to render repositories
+     function renderRepositories(repos) {
+        const repoContainer = document.getElementById('repoContainer');
+        repoContainer.innerHTML = ''; // Clear previous content
+
+        repos.forEach(repo => {
+            const repoCard = document.createElement('div');
+            repoCard.classList.add('repo-card');
+
+            const starClass = repo.isStarred ? 'star-icon starred' : 'star-icon';
+
+            repoCard.innerHTML = `
+                <img src="${repo.imageUrl}" alt="${repo.name}">
+                <div class="repo-details">
+                    <h2>${repo.name}</h2>
+                    <p>${repo.description}</p>
+                    <p><strong>Language:</strong> ${repo.language}</p>
+                    <p><strong>Stars:</strong> <span class="${starClass}" onclick="toggleStar('${repo.name}')">★</span> ${repo.stars}</p>
+                </div>
+            `;
+
+            repoContainer.appendChild(repoCard);
+        });
+    }
+
+    // Function to toggle star (add/remove star)
+    function toggleStar(repoName) {
+        const repo = repositories.find(repo => repo.name === repoName);
+        if (repo) {
+            repo.stars += repo.isStarred ? -1 : 1;
+            repo.isStarred = !repo.isStarred;
+            renderRepositories(repositories);
+        }
+    }
+
+    // Function to filter repositories based on search and language
+    function filterRepositories() {
+        const searchInput = document.getElementById('searchInput').value.toLowerCase();
+        const languageFilter = document.getElementById('languageFilter').value.toLowerCase();
+        const starredFilter = document.getElementById('starredFilter').checked;
+
+        const filteredRepositories = repositories.filter(repo => {
+            const isSearchMatch = repo.name.toLowerCase().includes(searchInput) || repo.description.toLowerCase().includes(searchInput);
+            const isLanguageMatch = languageFilter === '' || repo.language.toLowerCase() === languageFilter;
+            const isStarredMatch = !starredFilter || repo.isStarred === starredFilter;
+
+            return isSearchMatch && isLanguageMatch && isStarredMatch;
+        });
+
+        renderRepositories(filteredRepositories);}
+
+    // Event listeners for search input and language filter
+    document.getElementById('searchInput').addEventListener('input', filterRepositories);
+    document.getElementById('languageFilter').addEventListener('change', filterRepositories);
+
+    // Call the function to initially render repositories
+    renderRepositories(repositories);
+</script>
+
+  
+</body>
+</html>
